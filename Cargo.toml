@@ -1,0 +1,9 @@
+[package]
+name = "sqlformatter"
+version = "0.1.0"
+authors = ["moparisthebest <admin@moparisthebest.com>"]
+
+[dependencies]
+clipboard = "0.4.6"
+regex = "0.2.6"
+inputbot = "0.4.0"
