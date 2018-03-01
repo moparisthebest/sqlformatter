@@ -67,14 +67,20 @@ fn convert(sql: &str) -> String {
 
 fn main() {
     ZKey.bind(|| {
-        if LControlKey.is_pressed() && LShiftKey.is_pressed() {
+
+        #[cfg(target_os = "linux")]
+        let l_alt_key = OtherKey(0xFFE9);
+        #[cfg(target_os = "windows")]
+        let l_alt_key = OtherKey(0x12);
+
+        if LControlKey.is_pressed() && l_alt_key.is_pressed() {
             let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
 
             let clipboard = ctx.get_contents().unwrap();
-            println!("clipboard: {}", clipboard);
+            //println!("clipboard: {}", clipboard);
 
             let converted = convert(&clipboard);
-            println!("converted: {}", converted);
+            //println!("converted: {}", converted);
 
             ctx.set_contents(converted).unwrap();
         }
